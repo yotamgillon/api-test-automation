@@ -1,0 +1,5 @@
+tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[1]
+tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[2]
+tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[5]
+tests/ui/test_orders_ui.py::test_create_order_through_form_shows_it_in_table
+tests/ui/test_orders_ui.py::test_create_two_orders_delete_one_keeps_the_other

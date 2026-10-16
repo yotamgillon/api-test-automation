@@ -1,0 +1,11 @@
+# Reproduction run with BUGGY_MODE=BUG-003 against http://127.0.0.1:8803
+$ curl -s -X POST http://127.0.0.1:8803/_reset
+
+$ curl -s -X POST -H Content-Type: application/json -d {"customer":"C1","item":"Pen","quantity":1} http://127.0.0.1:8803/orders
+{"id":"ORD-0001","customer":"C1","item":"Pen","quantity":1,"status":"new"}
+$ curl -s -X POST -H Content-Type: application/json -d {"customer":"C2","item":"Pen","quantity":2} http://127.0.0.1:8803/orders
+{"id":"ORD-0002","customer":"C2","item":"Pen","quantity":2,"status":"new"}
+$ curl -s -X POST -H Content-Type: application/json -d {"customer":"C3","item":"Pen","quantity":3} http://127.0.0.1:8803/orders
+{"id":"ORD-0003","customer":"C3","item":"Pen","quantity":3,"status":"new"}
+$ curl -s http://127.0.0.1:8803/orders
+[{"id":"ORD-0001","customer":"C1","item":"Pen","quantity":1,"status":"new"},{"id":"ORD-0002","customer":"C2","item":"Pen","quantity":2,"status":"new"}]

@@ -1,0 +1,17 @@
+tests/api/test_orders_schema.py::test_conflict_response_matches_error_schema
+tests/api/test_orders_status.py::test_bug004_new_order_cannot_jump_straight_to_delivered
+tests/api/test_orders_status.py::test_status_transition[cancelled-to-delivered]
+tests/api/test_orders_status.py::test_status_transition[cancelled-to-new]
+tests/api/test_orders_status.py::test_status_transition[cancelled-to-paid]
+tests/api/test_orders_status.py::test_status_transition[cancelled-to-shipped]
+tests/api/test_orders_status.py::test_status_transition[delivered-to-cancelled]
+tests/api/test_orders_status.py::test_status_transition[delivered-to-new]
+tests/api/test_orders_status.py::test_status_transition[delivered-to-paid]
+tests/api/test_orders_status.py::test_status_transition[delivered-to-shipped]
+tests/api/test_orders_status.py::test_status_transition[new-to-delivered]
+tests/api/test_orders_status.py::test_status_transition[new-to-shipped]
+tests/api/test_orders_status.py::test_status_transition[paid-to-delivered]
+tests/api/test_orders_status.py::test_status_transition[paid-to-new]
+tests/api/test_orders_status.py::test_status_transition[shipped-to-cancelled]
+tests/api/test_orders_status.py::test_status_transition[shipped-to-new]
+tests/api/test_orders_status.py::test_status_transition[shipped-to-paid]

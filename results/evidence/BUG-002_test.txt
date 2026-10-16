@@ -1,0 +1,11 @@
+# BUGGY_MODE=BUG-002  pytest --tb=short -q tests/api/test_orders_negative.py::test_bug002_get_missing_order_returns_404
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________________ test_bug002_get_missing_order_returns_404 ___________________
+tests/api/test_orders_negative.py:43: in test_bug002_get_missing_order_returns_404
+    assert response.status_code == 404
+E   assert 200 == 404
+E    +  where 200 = <Response [200 OK]>.status_code
+=========================== short test summary info ============================
+FAILED tests/api/test_orders_negative.py::test_bug002_get_missing_order_returns_404
+1 failed in 0.22s

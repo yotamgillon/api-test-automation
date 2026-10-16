@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Lint
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: API tests
+        run: python -m pytest tests/api --html=results/report_api.html --self-contained-html
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
+      - name: UI tests (headless)
+        run: python -m pytest tests/ui --html=results/report_ui.html --self-contained-html
+      - name: Upload HTML reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-reports
+          path: |
+            results/report_api.html
+            results/report_ui.html
+          if-no-files-found: warn

@@ -1,0 +1,13 @@
+# Reproduction run with BUGGY_MODE=BUG-004 against http://127.0.0.1:8804
+$ curl -s -X POST http://127.0.0.1:8804/_reset
+
+$ curl -s -X POST -H Content-Type: application/json -d {"customer":"Ann","item":"Pen","quantity":1} http://127.0.0.1:8804/orders
+{"id":"ORD-0001","customer":"Ann","item":"Pen","quantity":1,"status":"new"}
+$ curl -s -i -X PUT -H Content-Type: application/json -d {"status":"delivered"} http://127.0.0.1:8804/orders/ORD-0001
+HTTP/1.1 200 OK
+date: Fri, 16 Oct 2026 20:31:10 GMT
+server: uvicorn
+content-length: 81
+content-type: application/json
+
+{"id":"ORD-0001","customer":"Ann","item":"Pen","quantity":1,"status":"delivered"}

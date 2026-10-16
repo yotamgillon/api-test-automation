@@ -1,0 +1,11 @@
+# BUGGY_MODE=BUG-001  pytest --tb=short -q tests/api/test_orders_negative.py::test_bug001_negative_quantity_is_rejected_and_not_stored
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_bug001_negative_quantity_is_rejected_and_not_stored ___________
+tests/api/test_orders_negative.py:36: in test_bug001_negative_quantity_is_rejected_and_not_stored
+    assert response.status_code == 422
+E   assert 201 == 422
+E    +  where 201 = <Response [201 Created]>.status_code
+=========================== short test summary info ============================
+FAILED tests/api/test_orders_negative.py::test_bug001_negative_quantity_is_rejected_and_not_stored
+1 failed in 0.22s

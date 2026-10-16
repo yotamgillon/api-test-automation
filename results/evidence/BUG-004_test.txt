@@ -1,0 +1,11 @@
+# BUGGY_MODE=BUG-004  pytest --tb=short -q tests/api/test_orders_status.py::test_bug004_new_order_cannot_jump_straight_to_delivered
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_bug004_new_order_cannot_jump_straight_to_delivered ____________
+tests/api/test_orders_status.py:40: in test_bug004_new_order_cannot_jump_straight_to_delivered
+    assert response.status_code == 409
+E   assert 200 == 409
+E    +  where 200 = <Response [200 OK]>.status_code
+=========================== short test summary info ============================
+FAILED tests/api/test_orders_status.py::test_bug004_new_order_cannot_jump_straight_to_delivered
+1 failed in 0.22s

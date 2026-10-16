@@ -1,0 +1,2 @@
+tests/ui/test_orders_ui.py::test_bug005_delete_removes_row_without_page_reload
+tests/ui/test_orders_ui.py::test_create_two_orders_delete_one_keeps_the_other

@@ -1,0 +1,16 @@
+# BUGGY_MODE=BUG-005  pytest --tb=short -q tests/ui/test_orders_ui.py::test_bug005_delete_removes_row_without_page_reload
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_bug005_delete_removes_row_without_page_reload ______________
+tests/ui/test_orders_ui.py:57: in test_bug005_delete_removes_row_without_page_reload
+    expect(page.get_by_test_id("order-row-ORD-0001")).to_have_count(0)
+E   AssertionError: Locator expected to have count '0'
+E   Actual value: 1 
+E   Call log:
+E     - Expect "to_have_count" get_by_test_id("order-row-ORD-0001") with timeout 2000ms
+E     - waiting for get_by_test_id("order-row-ORD-0001")
+E       21 × locator resolved to 1 element
+E          - unexpected value "1"
+=========================== short test summary info ============================
+FAILED tests/ui/test_orders_ui.py::test_bug005_delete_removes_row_without_page_reload
+1 failed in 2.81s

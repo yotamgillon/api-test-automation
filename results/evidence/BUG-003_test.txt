@@ -1,0 +1,11 @@
+# BUGGY_MODE=BUG-003  pytest --tb=short -q tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[5]
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_bug003_list_returns_every_created_order[5] ________________
+tests/api/test_orders_happy.py:56: in test_bug003_list_returns_every_created_order
+    assert len(listed) == count
+E   AssertionError: assert 4 == 5
+E    +  where 4 = len([{'id': 'ORD-0001', 'customer': 'Customer 0', 'item': 'Widget', 'quantity': 1, ...}, {'id': 'ORD-0002', 'customer': 'C...em': 'Widget', 'quantity': 1, ...}, {'id': 'ORD-0004', 'customer': 'Customer 3', 'item': 'Widget', 'quantity': 1, ...}])
+=========================== short test summary info ============================
+FAILED tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[5]
+1 failed in 0.22s

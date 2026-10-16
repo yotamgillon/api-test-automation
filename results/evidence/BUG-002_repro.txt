@@ -1,0 +1,15 @@
+# Reproduction run with BUGGY_MODE=BUG-002 against http://127.0.0.1:8802
+$ curl -s -i -X POST http://127.0.0.1:8802/_reset
+HTTP/1.1 204 No Content
+date: Fri, 16 Oct 2026 20:31:08 GMT
+server: uvicorn
+
+
+$ curl -s -i http://127.0.0.1:8802/orders/DOES-NOT-EXIST
+HTTP/1.1 200 OK
+date: Fri, 16 Oct 2026 20:31:08 GMT
+server: uvicorn
+content-length: 28
+content-type: application/json
+
+{"detail":"order not found"}

@@ -1,0 +1,7 @@
+tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[minus-one]
+tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[zero]
+tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[minus-one]
+tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[zero]
+tests/api/test_orders_negative.py::test_bug001_negative_quantity_is_rejected_and_not_stored
+tests/api/test_orders_schema.py::test_error_responses_match_error_schema[422-quantity]
+tests/ui/test_orders_ui.py::test_invalid_form_shows_message_and_creates_no_order[quantity-0]

@@ -1,0 +1,23 @@
+# Reproduction run with BUGGY_MODE=BUG-001 against http://127.0.0.1:8801
+$ curl -s -i -X POST http://127.0.0.1:8801/_reset
+HTTP/1.1 204 No Content
+date: Fri, 16 Oct 2026 20:31:08 GMT
+server: uvicorn
+
+
+$ curl -s -i -X POST -H Content-Type: application/json -d {"customer":"Ann","item":"Pen","quantity":-5} http://127.0.0.1:8801/orders
+HTTP/1.1 201 Created
+date: Fri, 16 Oct 2026 20:31:08 GMT
+server: uvicorn
+content-length: 76
+content-type: application/json
+
+{"id":"ORD-0001","customer":"Ann","item":"Pen","quantity":-5,"status":"new"}
+$ curl -s -i http://127.0.0.1:8801/orders/ORD-0001
+HTTP/1.1 200 OK
+date: Fri, 16 Oct 2026 20:31:08 GMT
+server: uvicorn
+content-length: 76
+content-type: application/json
+
+{"id":"ORD-0001","customer":"Ann","item":"Pen","quantity":-5,"status":"new"}

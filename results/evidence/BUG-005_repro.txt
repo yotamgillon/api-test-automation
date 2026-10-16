@@ -1,0 +1,7 @@
+# Reproduction run with BUGGY_MODE=BUG-005 against http://127.0.0.1:8805
+step 1: page opened, data-buggy = 1
+step 2: rows before delete (ORD-0001 visible): True
+step 3: clicked Delete, server answered HTTP 204
+step 4: ORD-0001 rows still in table, no reload: 1
+step 4b: screenshot of the table saved to docs/bug_reports/img/BUG-005_after_delete.png
+step 5: ORD-0001 rows after manual reload: 0

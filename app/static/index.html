@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Orders</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; max-width: 48rem; }
+    label { display: block; margin: .5rem 0 .2rem; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1.5rem; }
+    th, td { border: 1px solid #ccc; padding: .4rem; text-align: left; }
+    #form-error { color: #b00020; min-height: 1.2rem; }
+  </style>
+</head>
+<body data-testid="app" data-buggy="__BUGGY__" data-loaded="false">
+  <h1>Orders</h1>
+  <form id="order-form" data-testid="order-form" novalidate>
+    <label for="customer">Customer</label>
+    <input id="customer" data-testid="customer-input" name="customer">
+    <label for="item">Item</label>
+    <input id="item" data-testid="item-input" name="item">
+    <label for="quantity">Quantity</label>
+    <input id="quantity" data-testid="quantity-input" name="quantity" type="number">
+    <p><button type="submit" data-testid="submit-button">Create order</button></p>
+    <p id="form-error" data-testid="form-error" role="alert"></p>
+  </form>
+  <table data-testid="orders-table">
+    <thead>
+      <tr><th>ID</th><th>Customer</th><th>Item</th><th>Qty</th><th>Status</th><th></th></tr>
+    </thead>
+    <tbody id="orders-body"></tbody>
+  </table>
+  <p data-testid="empty-message" id="empty-message">No orders yet.</p>
+
+<script>
+  // The server renders the seeded-bug flag into the page. The browser never reads env vars.
+  const BUGGY = document.body.dataset.buggy === "1";
+  const body = document.getElementById("orders-body");
+  const errorBox = document.getElementById("form-error");
+  const emptyMessage = document.getElementById("empty-message");
+
+  function cell(name, text) {
+    const td = document.createElement("td");
+    td.setAttribute("data-testid", "cell-" + name);
+    td.textContent = text;
+    return td;
+  }
+
+  async function refresh() {
+    const orders = await (await fetch("/orders")).json();
+    body.replaceChildren();
+    for (const o of orders) {
+      const tr = document.createElement("tr");
+      tr.setAttribute("data-testid", "order-row-" + o.id);
+      for (const name of ["id", "customer", "item", "quantity", "status"]) {
+        tr.append(cell(name, o[name]));
+      }
+      const actions = document.createElement("td");
+      const btn = document.createElement("button");
+      btn.textContent = "Delete";
+      btn.setAttribute("data-testid", "delete-" + o.id);
+      btn.addEventListener("click", () => removeOrder(o.id));
+      actions.append(btn);
+      tr.append(actions);
+      body.append(tr);
+    }
+    emptyMessage.hidden = orders.length > 0;
+    document.body.dataset.loaded = "true";
+  }
+
+  async function removeOrder(id) {
+    await fetch("/orders/" + encodeURIComponent(id), { method: "DELETE" });
+    // BUG-005 (BUGGY_MODE): the table is not refreshed after a delete.
+    if (!BUGGY) await refresh();
+  }
+
+  document.getElementById("order-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    errorBox.textContent = "";
+    const raw = document.getElementById("quantity").value;
+    const payload = {
+      customer: document.getElementById("customer").value,
+      item: document.getElementById("item").value,
+      quantity: raw === "" ? null : Number(raw),
+    };
+    const res = await fetch("/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      errorBox.textContent = (await res.json()).detail;
+      return;
+    }
+    event.target.reset();
+    await refresh();
+  });
+
+  refresh();
+</script>
+</body>
+</html>

@@ -1,0 +1,758 @@
+BUGGY_MODE=1 .venv/bin/python -m pytest -v --html=results/report_buggy.html --self-contained-html
+============================= test session starts ==============================
+platform darwin -- Python 3.13.7, pytest-9.1.1, pluggy-1.7.0 -- /Users/yotamgillon/api-test-automation/.venv/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.13.7', 'Platform': 'macOS-27.0.1-arm64-arm-64bit-Mach-O', 'Packages': {'pytest': '9.1.1', 'pluggy': '1.7.0'}, 'Plugins': {'cov': '7.1.0', 'metadata': '3.1.1', 'html': '4.2.0', 'anyio': '4.15.1'}}
+rootdir: /Users/yotamgillon/api-test-automation
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0, metadata-3.1.1, html-4.2.0, anyio-4.15.1
+collecting ... collected 86 items
+
+tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[minus-one] FAILED [  1%]
+tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[zero] FAILED [  2%]
+tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[min-valid] PASSED [  3%]
+tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[max-valid] PASSED [  4%]
+tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[above-max] PASSED [  5%]
+tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[non-integer] PASSED [  6%]
+tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[not-a-number] PASSED [  8%]
+tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[minus-one] FAILED [  9%]
+tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[zero] FAILED [ 10%]
+tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[min-valid] PASSED [ 11%]
+tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[max-valid] PASSED [ 12%]
+tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[above-max] PASSED [ 13%]
+tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[non-integer] PASSED [ 15%]
+tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[not-a-number] PASSED [ 16%]
+tests/api/test_orders_happy.py::test_create_order_returns_201_and_status_new PASSED [ 17%]
+tests/api/test_orders_happy.py::test_create_order_with_explicit_id_keeps_it PASSED [ 18%]
+tests/api/test_orders_happy.py::test_generated_ids_are_sequential_and_reset_restarts_the_counter PASSED [ 19%]
+tests/api/test_orders_happy.py::test_generated_id_skips_an_id_already_taken_by_a_client_chosen_id PASSED [ 20%]
+tests/api/test_orders_happy.py::test_get_existing_order_returns_it PASSED [ 22%]
+tests/api/test_orders_happy.py::test_list_is_empty_when_no_orders PASSED [ 23%]
+tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[1] FAILED [ 24%]
+tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[2] FAILED [ 25%]
+tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[5] FAILED [ 26%]
+tests/api/test_orders_happy.py::test_update_changes_only_the_given_fields PASSED [ 27%]
+tests/api/test_orders_happy.py::test_update_with_empty_body_changes_nothing PASSED [ 29%]
+tests/api/test_orders_happy.py::test_delete_returns_204_and_removes_only_that_order FAILED [ 30%]
+tests/api/test_orders_happy.py::test_index_page_is_served PASSED         [ 31%]
+tests/api/test_orders_negative.py::test_duplicate_id_returns_409 PASSED  [ 32%]
+tests/api/test_orders_negative.py::test_missing_required_field_returns_422[customer] PASSED [ 33%]
+tests/api/test_orders_negative.py::test_missing_required_field_returns_422[item] PASSED [ 34%]
+tests/api/test_orders_negative.py::test_missing_required_field_returns_422[quantity] PASSED [ 36%]
+tests/api/test_orders_negative.py::test_blank_text_field_returns_422[-customer] PASSED [ 37%]
+tests/api/test_orders_negative.py::test_blank_text_field_returns_422[-item] PASSED [ 38%]
+tests/api/test_orders_negative.py::test_blank_text_field_returns_422[   -customer] PASSED [ 39%]
+tests/api/test_orders_negative.py::test_blank_text_field_returns_422[   -item] PASSED [ 40%]
+tests/api/test_orders_negative.py::test_bug001_negative_quantity_is_rejected_and_not_stored FAILED [ 41%]
+tests/api/test_orders_negative.py::test_bug002_get_missing_order_returns_404 FAILED [ 43%]
+tests/api/test_orders_negative.py::test_update_missing_order_returns_404 PASSED [ 44%]
+tests/api/test_orders_negative.py::test_delete_missing_order_returns_404 PASSED [ 45%]
+tests/api/test_orders_negative.py::test_delete_then_get_returns_404 FAILED [ 46%]
+tests/api/test_orders_negative.py::test_delete_twice_second_call_returns_404 PASSED [ 47%]
+tests/api/test_orders_negative.py::test_unknown_status_value_returns_422 PASSED [ 48%]
+tests/api/test_orders_negative.py::test_invalid_json_types_return_422 PASSED [ 50%]
+tests/api/test_orders_negative.py::test_reset_endpoint_is_hidden_unless_test_endpoints_are_enabled PASSED [ 51%]
+tests/api/test_orders_schema.py::test_create_response_matches_order_schema PASSED [ 52%]
+tests/api/test_orders_schema.py::test_get_response_matches_order_schema PASSED [ 53%]
+tests/api/test_orders_schema.py::test_list_response_items_match_order_schema PASSED [ 54%]
+tests/api/test_orders_schema.py::test_update_response_matches_order_schema PASSED [ 55%]
+tests/api/test_orders_schema.py::test_delete_response_has_empty_body PASSED [ 56%]
+tests/api/test_orders_schema.py::test_error_responses_match_error_schema[404-get] FAILED [ 58%]
+tests/api/test_orders_schema.py::test_error_responses_match_error_schema[422-missing-fields] PASSED [ 59%]
+tests/api/test_orders_schema.py::test_error_responses_match_error_schema[422-quantity] FAILED [ 60%]
+tests/api/test_orders_schema.py::test_conflict_response_matches_error_schema FAILED [ 61%]
+tests/api/test_orders_status.py::test_status_transition[new-to-paid] PASSED [ 62%]
+tests/api/test_orders_status.py::test_status_transition[new-to-shipped] FAILED [ 63%]
+tests/api/test_orders_status.py::test_status_transition[new-to-delivered] FAILED [ 65%]
+tests/api/test_orders_status.py::test_status_transition[new-to-cancelled] PASSED [ 66%]
+tests/api/test_orders_status.py::test_status_transition[paid-to-new] FAILED [ 67%]
+tests/api/test_orders_status.py::test_status_transition[paid-to-shipped] PASSED [ 68%]
+tests/api/test_orders_status.py::test_status_transition[paid-to-delivered] FAILED [ 69%]
+tests/api/test_orders_status.py::test_status_transition[paid-to-cancelled] PASSED [ 70%]
+tests/api/test_orders_status.py::test_status_transition[shipped-to-new] FAILED [ 72%]
+tests/api/test_orders_status.py::test_status_transition[shipped-to-paid] FAILED [ 73%]
+tests/api/test_orders_status.py::test_status_transition[shipped-to-delivered] PASSED [ 74%]
+tests/api/test_orders_status.py::test_status_transition[shipped-to-cancelled] FAILED [ 75%]
+tests/api/test_orders_status.py::test_status_transition[delivered-to-new] FAILED [ 76%]
+tests/api/test_orders_status.py::test_status_transition[delivered-to-paid] FAILED [ 77%]
+tests/api/test_orders_status.py::test_status_transition[delivered-to-shipped] FAILED [ 79%]
+tests/api/test_orders_status.py::test_status_transition[delivered-to-cancelled] FAILED [ 80%]
+tests/api/test_orders_status.py::test_status_transition[cancelled-to-new] FAILED [ 81%]
+tests/api/test_orders_status.py::test_status_transition[cancelled-to-paid] FAILED [ 82%]
+tests/api/test_orders_status.py::test_status_transition[cancelled-to-shipped] FAILED [ 83%]
+tests/api/test_orders_status.py::test_status_transition[cancelled-to-delivered] FAILED [ 84%]
+tests/api/test_orders_status.py::test_bug004_new_order_cannot_jump_straight_to_delivered FAILED [ 86%]
+tests/api/test_orders_status.py::test_same_status_update_is_an_accepted_noop[new] PASSED [ 87%]
+tests/api/test_orders_status.py::test_same_status_update_is_an_accepted_noop[paid] PASSED [ 88%]
+tests/api/test_orders_status.py::test_same_status_update_is_an_accepted_noop[shipped] PASSED [ 89%]
+tests/api/test_orders_status.py::test_same_status_update_is_an_accepted_noop[delivered] PASSED [ 90%]
+tests/api/test_orders_status.py::test_same_status_update_is_an_accepted_noop[cancelled] PASSED [ 91%]
+tests/ui/test_orders_ui.py::test_empty_table_shows_empty_message PASSED  [ 93%]
+tests/ui/test_orders_ui.py::test_create_order_through_form_shows_it_in_table FAILED [ 94%]
+tests/ui/test_orders_ui.py::test_bug005_delete_removes_row_without_page_reload FAILED [ 95%]
+tests/ui/test_orders_ui.py::test_create_two_orders_delete_one_keeps_the_other FAILED [ 96%]
+tests/ui/test_orders_ui.py::test_invalid_form_shows_message_and_creates_no_order[missing-customer] PASSED [ 97%]
+tests/ui/test_orders_ui.py::test_invalid_form_shows_message_and_creates_no_order[quantity-0] FAILED [ 98%]
+tests/ui/test_orders_ui.py::test_invalid_form_shows_message_and_creates_no_order[quantity-101] PASSED [100%]
+
+=================================== FAILURES ===================================
+__________________ test_create_quantity_boundaries[minus-one] __________________
+
+client = <httpx.Client object at 0x10a5fe660>, quantity = -1
+expected_status = 422
+
+    @pytest.mark.parametrize(("quantity", "expected_status"), QUANTITY_CASES)
+    def test_create_quantity_boundaries(client, quantity, expected_status):
+        payload = {"customer": "Ann", "item": "Pen", "quantity": quantity}
+>       assert client.post("/orders", json=payload).status_code == expected_status
+E       AssertionError: assert 201 == 422
+E        +  where 201 = <Response [201 Created]>.status_code
+E        +    where <Response [201 Created]> = post('/orders', json={'customer': 'Ann', 'item': 'Pen', 'quantity': -1})
+E        +      where post = <httpx.Client object at 0x10a5fe660>.post
+
+tests/api/test_orders_boundaries.py:21: AssertionError
+____________________ test_create_quantity_boundaries[zero] _____________________
+
+client = <httpx.Client object at 0x10a6439d0>, quantity = 0
+expected_status = 422
+
+    @pytest.mark.parametrize(("quantity", "expected_status"), QUANTITY_CASES)
+    def test_create_quantity_boundaries(client, quantity, expected_status):
+        payload = {"customer": "Ann", "item": "Pen", "quantity": quantity}
+>       assert client.post("/orders", json=payload).status_code == expected_status
+E       AssertionError: assert 201 == 422
+E        +  where 201 = <Response [201 Created]>.status_code
+E        +    where <Response [201 Created]> = post('/orders', json={'customer': 'Ann', 'item': 'Pen', 'quantity': 0})
+E        +      where post = <httpx.Client object at 0x10a6439d0>.post
+
+tests/api/test_orders_boundaries.py:21: AssertionError
+__________________ test_update_quantity_boundaries[minus-one] __________________
+
+client = <httpx.Client object at 0x10a6bf240>
+make_order = <function make_order.<locals>._make at 0x10a744040>, quantity = -1
+create_status = 422
+
+    @pytest.mark.parametrize(("quantity", "create_status"), QUANTITY_CASES)
+    def test_update_quantity_boundaries(client, make_order, quantity, create_status):
+        order = make_order()
+        expected_status = 200 if create_status == 201 else 422
+        response = client.put(f"/orders/{order['id']}", json={"quantity": quantity})
+>       assert response.status_code == expected_status
+E       assert 200 == 422
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_boundaries.py:29: AssertionError
+____________________ test_update_quantity_boundaries[zero] _____________________
+
+client = <httpx.Client object at 0x10a69fe50>
+make_order = <function make_order.<locals>._make at 0x10a744540>, quantity = 0
+create_status = 422
+
+    @pytest.mark.parametrize(("quantity", "create_status"), QUANTITY_CASES)
+    def test_update_quantity_boundaries(client, make_order, quantity, create_status):
+        order = make_order()
+        expected_status = 200 if create_status == 201 else 422
+        response = client.put(f"/orders/{order['id']}", json={"quantity": quantity})
+>       assert response.status_code == expected_status
+E       assert 200 == 422
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_boundaries.py:29: AssertionError
+_______________ test_bug003_list_returns_every_created_order[1] ________________
+
+client = <httpx.Client object at 0x10a711c10>
+make_order = <function make_order.<locals>._make at 0x10a745580>, count = 1
+
+    @pytest.mark.parametrize("count", [1, 2, 5])
+    def test_bug003_list_returns_every_created_order(client, make_order, count):
+        """BUG-003: the list endpoint must return all N orders, including the last one."""
+        created_ids = [make_order(customer=f"Customer {i}")["id"] for i in range(count)]
+        listed = client.get("/orders").json()
+>       assert len(listed) == count
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests/api/test_orders_happy.py:70: AssertionError
+_______________ test_bug003_list_returns_every_created_order[2] ________________
+
+client = <httpx.Client object at 0x10a711010>
+make_order = <function make_order.<locals>._make at 0x10a71a700>, count = 2
+
+    @pytest.mark.parametrize("count", [1, 2, 5])
+    def test_bug003_list_returns_every_created_order(client, make_order, count):
+        """BUG-003: the list endpoint must return all N orders, including the last one."""
+        created_ids = [make_order(customer=f"Customer {i}")["id"] for i in range(count)]
+        listed = client.get("/orders").json()
+>       assert len(listed) == count
+E       AssertionError: assert 1 == 2
+E        +  where 1 = len([{'id': 'ORD-0001', 'customer': 'Customer 0', 'item': 'Widget', 'quantity': 1, ...}])
+
+tests/api/test_orders_happy.py:70: AssertionError
+_______________ test_bug003_list_returns_every_created_order[5] ________________
+
+client = <httpx.Client object at 0x10a712a50>
+make_order = <function make_order.<locals>._make at 0x10a744ae0>, count = 5
+
+    @pytest.mark.parametrize("count", [1, 2, 5])
+    def test_bug003_list_returns_every_created_order(client, make_order, count):
+        """BUG-003: the list endpoint must return all N orders, including the last one."""
+        created_ids = [make_order(customer=f"Customer {i}")["id"] for i in range(count)]
+        listed = client.get("/orders").json()
+>       assert len(listed) == count
+E       AssertionError: assert 4 == 5
+E        +  where 4 = len([{'id': 'ORD-0001', 'customer': 'Customer 0', 'item': 'Widget', 'quantity': 1, ...}, {'id': 'ORD-0002', 'customer': 'Customer 1', 'item': 'Widget', 'quantity': 1, ...}, {'id': 'ORD-0003', 'customer': 'Customer 2', 'item': 'Widget', 'quantity': 1, ...}, {'id': 'ORD-0004', 'customer': 'Customer 3', 'item': 'Widget', 'quantity': 1, ...}])
+
+tests/api/test_orders_happy.py:70: AssertionError
+_____________ test_delete_returns_204_and_removes_only_that_order ______________
+
+client = <httpx.Client object at 0x10a7119d0>
+make_order = <function make_order.<locals>._make at 0x10a747420>
+
+    def test_delete_returns_204_and_removes_only_that_order(client, make_order):
+        keep = make_order(customer="Keep")
+        drop = make_order(customer="Drop")
+        assert client.delete(f"/orders/{drop['id']}").status_code == 204
+        assert client.get(f"/orders/{keep['id']}").status_code == 200
+>       assert client.get(f"/orders/{drop['id']}").status_code == 404
+E       AssertionError: assert 200 == 404
+E        +  where 200 = <Response [200 OK]>.status_code
+E        +    where <Response [200 OK]> = get('/orders/ORD-0002')
+E        +      where get = <httpx.Client object at 0x10a7119d0>.get
+
+tests/api/test_orders_happy.py:95: AssertionError
+___________ test_bug001_negative_quantity_is_rejected_and_not_stored ___________
+
+client = <httpx.Client object at 0x10a711f10>
+
+    def test_bug001_negative_quantity_is_rejected_and_not_stored(client):
+        """BUG-001: a negative quantity must return 422 and must not create an order."""
+        response = client.post("/orders", json={"customer": "Ann", "item": "Pen", "quantity": -5})
+>       assert response.status_code == 422
+E       assert 201 == 422
+E        +  where 201 = <Response [201 Created]>.status_code
+
+tests/api/test_orders_negative.py:36: AssertionError
+__________________ test_bug002_get_missing_order_returns_404 ___________________
+
+client = <httpx.Client object at 0x10a712510>
+
+    def test_bug002_get_missing_order_returns_404(client):
+        """BUG-002: asking for an order that does not exist must return 404."""
+        response = client.get("/orders/DOES-NOT-EXIST")
+>       assert response.status_code == 404
+E       assert 200 == 404
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_negative.py:43: AssertionError
+_______________________ test_delete_then_get_returns_404 _______________________
+
+client = <httpx.Client object at 0x10a711550>
+make_order = <function make_order.<locals>._make at 0x10a79ce00>
+
+    def test_delete_then_get_returns_404(client, make_order):
+        order = make_order()
+        assert client.delete(f"/orders/{order['id']}").status_code == 204
+>       assert client.get(f"/orders/{order['id']}").status_code == 404
+E       AssertionError: assert 200 == 404
+E        +  where 200 = <Response [200 OK]>.status_code
+E        +    where <Response [200 OK]> = get('/orders/ORD-0001')
+E        +      where get = <httpx.Client object at 0x10a711550>.get
+
+tests/api/test_orders_negative.py:57: AssertionError
+_______________ test_error_responses_match_error_schema[404-get] _______________
+
+client = <httpx.Client object at 0x10a7116d0>, method = 'get'
+path = '/orders/NOPE', payload = None, expected_status = 404
+
+    @pytest.mark.parametrize(
+        ("method", "path", "payload", "expected_status"),
+        [
+            pytest.param("get", "/orders/NOPE", None, 404, id="404-get"),
+            pytest.param("post", "/orders", {"customer": "A"}, 422, id="422-missing-fields"),
+            pytest.param(
+                "post", "/orders", {"customer": "A", "item": "B", "quantity": 0}, 422, id="422-quantity"
+            ),
+        ],
+    )
+    def test_error_responses_match_error_schema(client, method, path, payload, expected_status):
+        response = client.request(method, path, json=payload)
+>       assert response.status_code == expected_status
+E       assert 200 == 404
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_schema.py:53: AssertionError
+____________ test_error_responses_match_error_schema[422-quantity] _____________
+
+client = <httpx.Client object at 0x10a712450>, method = 'post', path = '/orders'
+payload = {'customer': 'A', 'item': 'B', 'quantity': 0}, expected_status = 422
+
+    @pytest.mark.parametrize(
+        ("method", "path", "payload", "expected_status"),
+        [
+            pytest.param("get", "/orders/NOPE", None, 404, id="404-get"),
+            pytest.param("post", "/orders", {"customer": "A"}, 422, id="422-missing-fields"),
+            pytest.param(
+                "post", "/orders", {"customer": "A", "item": "B", "quantity": 0}, 422, id="422-quantity"
+            ),
+        ],
+    )
+    def test_error_responses_match_error_schema(client, method, path, payload, expected_status):
+        response = client.request(method, path, json=payload)
+>       assert response.status_code == expected_status
+E       assert 201 == 422
+E        +  where 201 = <Response [201 Created]>.status_code
+
+tests/api/test_orders_schema.py:53: AssertionError
+_________________ test_conflict_response_matches_error_schema __________________
+
+client = <httpx.Client object at 0x10a712bd0>
+order_in_status = <function order_in_status.<locals>._make at 0x10a79d080>
+
+    def test_conflict_response_matches_error_schema(client, order_in_status):
+        order_id = order_in_status("new")
+        response = client.put(f"/orders/{order_id}", json={"status": "delivered"})
+>       assert response.status_code == 409
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_schema.py:60: AssertionError
+____________________ test_status_transition[new-to-shipped] ____________________
+
+client = <httpx.Client object at 0x10a711f10>
+order_in_status = <function order_in_status.<locals>._make at 0x10a79eca0>
+source = 'new', target = 'shipped', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+___________________ test_status_transition[new-to-delivered] ___________________
+
+client = <httpx.Client object at 0x10a712810>
+order_in_status = <function order_in_status.<locals>._make at 0x10a79d940>
+source = 'new', target = 'delivered', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+_____________________ test_status_transition[paid-to-new] ______________________
+
+client = <httpx.Client object at 0x10a711d90>
+order_in_status = <function order_in_status.<locals>._make at 0x10a79fba0>
+source = 'paid', target = 'new', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+__________________ test_status_transition[paid-to-delivered] ___________________
+
+client = <httpx.Client object at 0x10a711790>
+order_in_status = <function order_in_status.<locals>._make at 0x10a79e200>
+source = 'paid', target = 'delivered', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+____________________ test_status_transition[shipped-to-new] ____________________
+
+client = <httpx.Client object at 0x10a798890>
+order_in_status = <function order_in_status.<locals>._make at 0x10a778900>
+source = 'shipped', target = 'new', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+___________________ test_status_transition[shipped-to-paid] ____________________
+
+client = <httpx.Client object at 0x10a713e90>
+order_in_status = <function order_in_status.<locals>._make at 0x10a79d300>
+source = 'shipped', target = 'paid', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+_________________ test_status_transition[shipped-to-cancelled] _________________
+
+client = <httpx.Client object at 0x10a713c50>
+order_in_status = <function order_in_status.<locals>._make at 0x10a79c2c0>
+source = 'shipped', target = 'cancelled', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+___________________ test_status_transition[delivered-to-new] ___________________
+
+client = <httpx.Client object at 0x10a712090>
+order_in_status = <function order_in_status.<locals>._make at 0x10a778cc0>
+source = 'delivered', target = 'new', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+__________________ test_status_transition[delivered-to-paid] ___________________
+
+client = <httpx.Client object at 0x10a711490>
+order_in_status = <function order_in_status.<locals>._make at 0x10a7787c0>
+source = 'delivered', target = 'paid', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+_________________ test_status_transition[delivered-to-shipped] _________________
+
+client = <httpx.Client object at 0x10a712a50>
+order_in_status = <function order_in_status.<locals>._make at 0x10a79e700>
+source = 'delivered', target = 'shipped', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+________________ test_status_transition[delivered-to-cancelled] ________________
+
+client = <httpx.Client object at 0x10a713710>
+order_in_status = <function order_in_status.<locals>._make at 0x10a79cc20>
+source = 'delivered', target = 'cancelled', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+___________________ test_status_transition[cancelled-to-new] ___________________
+
+client = <httpx.Client object at 0x10a712ed0>
+order_in_status = <function order_in_status.<locals>._make at 0x10a778d60>
+source = 'cancelled', target = 'new', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+__________________ test_status_transition[cancelled-to-paid] ___________________
+
+client = <httpx.Client object at 0x10a713f50>
+order_in_status = <function order_in_status.<locals>._make at 0x10a778720>
+source = 'cancelled', target = 'paid', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+_________________ test_status_transition[cancelled-to-shipped] _________________
+
+client = <httpx.Client object at 0x10a713ad0>
+order_in_status = <function order_in_status.<locals>._make at 0x10a779940>
+source = 'cancelled', target = 'shipped', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+________________ test_status_transition[cancelled-to-delivered] ________________
+
+client = <httpx.Client object at 0x10a7119d0>
+order_in_status = <function order_in_status.<locals>._make at 0x10a779260>
+source = 'cancelled', target = 'delivered', expected_status = 409
+
+    @pytest.mark.parametrize(("source", "target", "expected_status"), TRANSITION_CASES)
+    def test_status_transition(client, order_in_status, source, target, expected_status):
+        order_id = order_in_status(source)
+        response = client.put(f"/orders/{order_id}", json={"status": target})
+>       assert response.status_code == expected_status
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:31: AssertionError
+___________ test_bug004_new_order_cannot_jump_straight_to_delivered ____________
+
+client = <httpx.Client object at 0x10a711790>
+make_order = <function make_order.<locals>._make at 0x10a77a520>
+
+    def test_bug004_new_order_cannot_jump_straight_to_delivered(client, make_order):
+        """BUG-004: skipping paid and shipped must be rejected with 409 and leave status as new."""
+        order = make_order()
+        response = client.put(f"/orders/{order['id']}", json={"status": "delivered"})
+>       assert response.status_code == 409
+E       assert 200 == 409
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/api/test_orders_status.py:40: AssertionError
+_______________ test_create_order_through_form_shows_it_in_table _______________
+
+page = <Page url='http://127.0.0.1:50495/'>
+
+    def test_create_order_through_form_shows_it_in_table(page):
+        submit(page, customer="Ann", item="Pen", quantity=2)
+    
+>       expect_row(page, "ORD-0001", "Ann", "Pen", 2)
+
+tests/ui/test_orders_ui.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://127.0.0.1:50495/'>, order_id = 'ORD-0001'
+customer = 'Ann', item = 'Pen', quantity = 2, status = 'new'
+
+    def expect_row(page, order_id, customer, item, quantity, status="new"):
+        row = page.get_by_test_id(f"order-row-{order_id}")
+>       expect(row).to_be_visible()
+E       AssertionError: Locator expected to be visible
+E       Actual value: None
+E       Error: element(s) not found 
+E       Call log:
+E         - Expect "to_be_visible" get_by_test_id("order-row-ORD-0001") with timeout 2000ms
+E         - waiting for get_by_test_id("order-row-ORD-0001")
+E       
+E       Aria snapshot:
+E       - heading "Orders" [level=1]
+E       - text: Customer
+E       - textbox "Customer"
+E       - text: Item
+E       - textbox "Item"
+E       - text: Quantity
+E       - spinbutton "Quantity"
+E       - paragraph:
+E         - button "Create order"
+E       - alert
+E       - table:
+E         - rowgroup:
+E           - row "ID Customer Item Qty Status":
+E             - columnheader "ID"
+E             - columnheader "Customer"
+E             - columnheader "Item"
+E             - columnheader "Qty"
+E             - columnheader "Status"
+E             - columnheader
+E         - rowgroup
+E       - paragraph: No orders yet.
+
+tests/ui/test_orders_ui.py:26: AssertionError
+______________ test_bug005_delete_removes_row_without_page_reload ______________
+
+page = <Page url='http://127.0.0.1:50495/'>
+make_order = <function make_order.<locals>._make at 0x10aaf9080>
+
+    def test_bug005_delete_removes_row_without_page_reload(page, make_order):
+        """BUG-005: after a delete the table must update by itself, without a reload."""
+        make_order(customer="First")
+        make_order(customer="Second")
+        page.reload()
+        expect(page.get_by_test_id("order-row-ORD-0001")).to_be_visible()
+    
+        page.get_by_test_id("delete-ORD-0001").click()
+    
+>       expect(page.get_by_test_id("order-row-ORD-0001")).to_have_count(0)
+E       AssertionError: Locator expected to have count '0'
+E       Actual value: 1 
+E       Call log:
+E         - Expect "to_have_count" get_by_test_id("order-row-ORD-0001") with timeout 2000ms
+E         - waiting for get_by_test_id("order-row-ORD-0001")
+E           21 × locator resolved to 1 element
+E              - unexpected value "1"
+
+tests/ui/test_orders_ui.py:57: AssertionError
+______________ test_create_two_orders_delete_one_keeps_the_other _______________
+
+page = <Page url='http://127.0.0.1:50495/'>
+
+    def test_create_two_orders_delete_one_keeps_the_other(page):
+        submit(page, customer="Ann", item="Pen", quantity=1)
+>       expect_row(page, "ORD-0001", "Ann", "Pen", 1)
+
+tests/ui/test_orders_ui.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://127.0.0.1:50495/'>, order_id = 'ORD-0001'
+customer = 'Ann', item = 'Pen', quantity = 1, status = 'new'
+
+    def expect_row(page, order_id, customer, item, quantity, status="new"):
+        row = page.get_by_test_id(f"order-row-{order_id}")
+>       expect(row).to_be_visible()
+E       AssertionError: Locator expected to be visible
+E       Actual value: None
+E       Error: element(s) not found 
+E       Call log:
+E         - Expect "to_be_visible" get_by_test_id("order-row-ORD-0001") with timeout 2000ms
+E         - waiting for get_by_test_id("order-row-ORD-0001")
+E       
+E       Aria snapshot:
+E       - heading "Orders" [level=1]
+E       - text: Customer
+E       - textbox "Customer"
+E       - text: Item
+E       - textbox "Item"
+E       - text: Quantity
+E       - spinbutton "Quantity"
+E       - paragraph:
+E         - button "Create order"
+E       - alert
+E       - table:
+E         - rowgroup:
+E           - row "ID Customer Item Qty Status":
+E             - columnheader "ID"
+E             - columnheader "Customer"
+E             - columnheader "Item"
+E             - columnheader "Qty"
+E             - columnheader "Status"
+E             - columnheader
+E         - rowgroup
+E       - paragraph: No orders yet.
+
+tests/ui/test_orders_ui.py:26: AssertionError
+_______ test_invalid_form_shows_message_and_creates_no_order[quantity-0] _______
+
+page = <Page url='http://127.0.0.1:50495/'>
+client = <httpx.Client object at 0x10a841fd0>
+fields = {'customer': 'Ann', 'item': 'Pen', 'quantity': 0}
+message = 'quantity must be between 1 and 100'
+
+    @pytest.mark.parametrize(
+        ("fields", "message"),
+        [
+            pytest.param(
+                {"customer": "", "item": "Pen", "quantity": 1}, "customer", id="missing-customer"
+            ),
+            pytest.param(
+                {"customer": "Ann", "item": "Pen", "quantity": 0},
+                "quantity must be between 1 and 100",
+                id="quantity-0",
+            ),
+            pytest.param(
+                {"customer": "Ann", "item": "Pen", "quantity": 101},
+                "quantity must be between 1 and 100",
+                id="quantity-101",
+            ),
+        ],
+    )
+    def test_invalid_form_shows_message_and_creates_no_order(page, client, fields, message):
+        submit(page, **fields)
+    
+>       expect(page.get_by_test_id("form-error")).to_contain_text(message)
+E       AssertionError: Locator expected to contain text 'quantity must be between 1 and 100'
+E       Actual value:  
+E       Call log:
+E         - Expect "to_contain_text" get_by_test_id("form-error") with timeout 2000ms
+E         - waiting for get_by_test_id("form-error")
+E           21 × locator resolved to <p role="alert" id="form-error" data-testid="form-error"></p>
+E              - unexpected value ""
+E       
+E       Aria snapshot:
+E       - alert
+
+tests/ui/test_orders_ui.py:94: AssertionError
+- Generated html report: file:///Users/yotamgillon/api-test-automation/results/report_buggy.html -
+=========================== short test summary info ============================
+FAILED tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[minus-one]
+FAILED tests/api/test_orders_boundaries.py::test_create_quantity_boundaries[zero]
+FAILED tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[minus-one]
+FAILED tests/api/test_orders_boundaries.py::test_update_quantity_boundaries[zero]
+FAILED tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[1]
+FAILED tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[2]
+FAILED tests/api/test_orders_happy.py::test_bug003_list_returns_every_created_order[5]
+FAILED tests/api/test_orders_happy.py::test_delete_returns_204_and_removes_only_that_order
+FAILED tests/api/test_orders_negative.py::test_bug001_negative_quantity_is_rejected_and_not_stored
+FAILED tests/api/test_orders_negative.py::test_bug002_get_missing_order_returns_404
+FAILED tests/api/test_orders_negative.py::test_delete_then_get_returns_404 - ...
+FAILED tests/api/test_orders_schema.py::test_error_responses_match_error_schema[404-get]
+FAILED tests/api/test_orders_schema.py::test_error_responses_match_error_schema[422-quantity]
+FAILED tests/api/test_orders_schema.py::test_conflict_response_matches_error_schema
+FAILED tests/api/test_orders_status.py::test_status_transition[new-to-shipped]
+FAILED tests/api/test_orders_status.py::test_status_transition[new-to-delivered]
+FAILED tests/api/test_orders_status.py::test_status_transition[paid-to-new]
+FAILED tests/api/test_orders_status.py::test_status_transition[paid-to-delivered]
+FAILED tests/api/test_orders_status.py::test_status_transition[shipped-to-new]
+FAILED tests/api/test_orders_status.py::test_status_transition[shipped-to-paid]
+FAILED tests/api/test_orders_status.py::test_status_transition[shipped-to-cancelled]
+FAILED tests/api/test_orders_status.py::test_status_transition[delivered-to-new]
+FAILED tests/api/test_orders_status.py::test_status_transition[delivered-to-paid]
+FAILED tests/api/test_orders_status.py::test_status_transition[delivered-to-shipped]
+FAILED tests/api/test_orders_status.py::test_status_transition[delivered-to-cancelled]
+FAILED tests/api/test_orders_status.py::test_status_transition[cancelled-to-new]
+FAILED tests/api/test_orders_status.py::test_status_transition[cancelled-to-paid]
+FAILED tests/api/test_orders_status.py::test_status_transition[cancelled-to-shipped]
+FAILED tests/api/test_orders_status.py::test_status_transition[cancelled-to-delivered]
+FAILED tests/api/test_orders_status.py::test_bug004_new_order_cannot_jump_straight_to_delivered
+FAILED tests/ui/test_orders_ui.py::test_create_order_through_form_shows_it_in_table
+FAILED tests/ui/test_orders_ui.py::test_bug005_delete_removes_row_without_page_reload
+FAILED tests/ui/test_orders_ui.py::test_create_two_orders_delete_one_keeps_the_other
+FAILED tests/ui/test_orders_ui.py::test_invalid_form_shows_message_and_creates_no_order[quantity-0]
+======================== 34 failed, 52 passed in 10.27s ========================
+make[1]: *** [test-buggy] Error 1
