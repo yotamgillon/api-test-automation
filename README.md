@@ -1,5 +1,7 @@
 # api-test-automation
 
+[![ci](https://github.com/yotamgillon/api-test-automation/actions/workflows/ci.yml/badge.svg)](https://github.com/yotamgillon/api-test-automation/actions/workflows/ci.yml)
+
 A small QA automation portfolio project. It contains a tiny orders service (FastAPI, in memory) with a one-page UI, a test suite for it (pytest + httpx for the API, Playwright for the browser), CI, HTML and coverage reports, and bug reports.
 
 The service can switch on 5 deliberately seeded bugs with `BUGGY_MODE`. The same suite runs against the correct app (all green) and against the buggy app (it fails on the seeded bugs), which shows that the tests can actually catch defects.
@@ -67,7 +69,7 @@ What is not covered: the 4 uncovered lines (`app/main.py` lines 37, 54, 89, 99) 
 The JavaScript inside `app/static/index.html` is not measured by coverage. It is exercised by the UI tests, but there is no number for it.
 
 ## CI
-`.github/workflows/ci.yml` runs on every push: ruff, API tests, `playwright install --with-deps chromium`, UI tests (headless), and uploads the HTML reports as an artifact (`if: always()`). It uses Python 3.13, the same minor version as local development. The workflow file was parsed locally, but GitHub Actions has not been run yet because the project has not been pushed.
+`.github/workflows/ci.yml` runs on every push: ruff, API tests, `playwright install --with-deps chromium`, UI tests (headless), and uploads the HTML reports as an artifact (`if: always()`). It uses Python 3.13, the same minor version as local development. The runner is pinned to `ubuntu-24.04`. One run on GitHub passed (run 38963384607). It tested Chromium only, and a single run is not a stability record.
 
 ## Limitations
 - A small in-memory demo service, not a real product. There is no database, authentication or persistence.
@@ -77,4 +79,4 @@ The JavaScript inside `app/static/index.html` is not measured by coverage. It is
 - Only Chromium is tested. No cross-browser, performance, security, concurrency or accessibility testing (see TEST_PLAN.md).
 - Only the 8 top-level dependencies are pinned; their sub-dependencies are not.
 - The seeded bugs were written by me together with the tests that catch them, so the before and after demonstration shows the tests work as designed, not that they would find unknown bugs.
-- The CI workflow has not run yet.
+- CI: one GitHub Actions run passed (run 38963384607) on `ubuntu-24.04`, Chromium only. A single run is not a stability record.
